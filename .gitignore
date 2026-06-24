@@ -1,5 +1,15 @@
+# Rahasia — jangan pernah masuk ke Git!
 .env
+
+# Folder upload gambar (bisa besar, simpan di server langsung)
 /public/assets/img/games/
+/public/assets/img/carousel/
 /public/assets/img/avatars/
+
+# File sistem OS
 .DS_Store
 Thumbs.db
+
+# IDE
+.vscode/
+.idea/

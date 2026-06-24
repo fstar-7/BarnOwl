@@ -3,55 +3,46 @@
 class Controller
 {
 
-    // Fungsi untuk memanggil model
     public function model($model)
     {
         return new $model();
     }
 
-    //Toast
     public static function setToast($message, $type = 'success')
     {
         $_SESSION['toast'] = [
             'message' => $message,
-            'type'    => $type  // 'success', 'danger', 'warning', 'info'
+            'type'    => $type
         ];
     }
 
-    // Fungsi untuk memanggil view beserta layout-nya
-    public function view($view, $data = [])
+    public function view($view, $data = [], $extraCss = [])
     {
 
-        // ─── 1. GLOBAL DATA UNTUK NAVBAR ───
+        // ── 1. GLOBAL DATA ──
         $data['currentRoute'] = isset($_GET['url']) ? rtrim($_GET['url'], '/') : '';
+        $data['extraCss']     = $extraCss;
 
-        $data['cartSummary'] = [
-            'items' => [],
-            'totalItems' => 0,
-            'subtotal' => 0
-        ];
-
+        $data['cartSummary'] = ['items' => [], 'totalItems' => 0, 'subtotal' => 0];
         if (AuthHelper::isLoggedIn()) {
             $cartModel = new Cart();
             $data['cartSummary'] = $cartModel->getCartSummary(AuthHelper::id());
         }
 
-        // ─── 2. PENGECEKAN VIEW (ERROR HANDLING) ───
+        // ── 2. PENGECEKAN VIEW ──
         $viewFile = VIEWS_DIR . '/' . $view . '.php';
-
         if (!file_exists($viewFile)) {
-            // Hentikan sistem dengan pesan yang aman jika file tidak ada
-            die("Error System: View '<b>{$view}</b>' tidak ditemukan di direktori views.");
+            die("Error System: View '<b>{$view}</b>' tidak ditemukan.");
         }
 
-        // ─── 3. RENDER TAMPILAN ───
+        // ── 3. RENDER ──
         extract($data);
 
-        // Panggil kerangka UI secara berurutan
         require_once VIEWS_DIR . '/layouts/header.php';
         require_once VIEWS_DIR . '/layouts/navbar.php';
+        require_once VIEWS_DIR . '/layouts/auth.php';
         require_once VIEWS_DIR . '/layouts/toast.php';
-        require_once $viewFile; // Memanggil view yang sudah dipastikan ada
+        require_once $viewFile;
         require_once VIEWS_DIR . '/layouts/footer.php';
     }
 }

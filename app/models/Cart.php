@@ -1,17 +1,14 @@
 <?php
 
-// Tambahkan "extends Model"
 class Cart extends Model {
     
-    // Sama, hapus __construct() beserta isinya!
-    
     public function getCartSummary($userId) {
-        $query = "SELECT carts.id AS cart_id, games.id AS game_id, games.name, games.price, games.image 
-                  FROM carts 
-                  INNER JOIN games ON carts.game_id = games.id 
-                  WHERE carts.user_id = :user_id";
+        // PERBAIKAN: Menggunakan tabel 'cart' dan 'game', serta kolom 'thumbnail'
+        $query = "SELECT cart.id AS cart_id, game.id AS game_id, game.name, game.price, game.thumbnail AS image 
+                  FROM cart 
+                  INNER JOIN game ON cart.game_id = game.id 
+                  WHERE cart.user_id = :user_id";
                   
-        // Variabel $this->db bisa langsung dipakai!
         $stmt = $this->db->prepare($query);
         $stmt->execute(['user_id' => $userId]);
         
@@ -21,6 +18,7 @@ class Cart extends Model {
         $subtotal = 0;
         
         foreach ($items as &$item) {
+            // Nanti kamu bisa tambahkan logika diskon di sini jika diperlukan
             $item['finalPrice'] = $item['price'];
             $subtotal += $item['finalPrice'];
         }

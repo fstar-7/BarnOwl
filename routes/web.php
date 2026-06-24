@@ -15,3 +15,8 @@ $router->get('/games', 'GameController@index');
 
 // Contoh Rute Detail Game dengan ID (Misal: /games/1)
 $router->get('/games/:id', 'GameController@show');
+
+// Tambahkan 3 baris ini di daftar rute kamu:
+$router->post('/login', 'AuthController@login');
+$router->post('/register', 'AuthController@register');
+$router->get('/logout', 'AuthController@logout');

@@ -21,3 +21,39 @@
   .toast-info {
       background-color: #8a4dff;
   }
+
+  /* auth */
+  .custom-modal-input {
+    background-color: #161b26 !important;
+    border: 1px solid #2b3447 !important;
+    border-radius: 10px !important;
+  }
+  .custom-modal-input:focus {
+    border-color: #8a4dff !important;
+    box-shadow: 0 0 10px rgba(138, 77, 255, 0.25) !important;
+    background-color: #161b26 !important;
+    color: #fff !important;
+  }
+ 
+  .form-floating > .custom-modal-input:focus ~ label,
+  .form-floating > .custom-modal-input:not(:placeholder-shown) ~ label {
+    color: #9d69ff !important;
+  }
+  
+  .btn-purple-modal {
+    background-color: #8a4dff;
+    border-radius: 10px;
+    transition: 0.3s;
+  }
+  .btn-purple-modal:hover {
+    background-color: #9f68ff;
+    transform: translateY(-1px);
+  }
+  
+  .text-hover-purple {
+    color: #9fb4d4;
+    transition: 0.2s;
+  }
+  .text-hover-purple:hover {
+    color: #9d69ff !important;
+  }
