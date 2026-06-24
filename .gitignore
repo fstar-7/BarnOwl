@@ -1,0 +1,5 @@
+.env
+/public/assets/img/games/
+/public/assets/img/avatars/
+.DS_Store
+Thumbs.db

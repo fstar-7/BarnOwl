@@ -1,0 +1,253 @@
+.cart-icon:hover {
+    color: #9d69ff !important;
+    transform: scale(1.1);
+  }
+  
+  /* Kustomisasi gaya tombol login di navbar */
+  .btn-login-nav {
+    background-color: #8a4dff;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    transition: 0.3s;
+  }
+
+  .btn-login-nav:hover {
+    background-color: #9f68ff;
+    color: white !important;
+    transform: translateY(-1px);
+  }
+
+  /* Kustomisasi Box Dropdown Profil */
+  .custom-nav-dropdown {
+    background-color: #0f1117 !important;
+    border: 1px solid #222 !important;
+    border-radius: 12px !important;
+    padding: 8px 0 !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+    min-width: 180px;
+  }
+
+  .custom-nav-dropdown .dropdown-item {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    transition: 0.2s;
+  }
+
+  .custom-nav-dropdown .text-white-custom {
+    color: #cbd5e1 !important;
+  }
+
+  .custom-nav-dropdown .text-white-custom:hover {
+    background-color: #1e293b !important;
+    color: #9d69ff !important;
+  }
+
+  .custom-nav-dropdown .text-danger-custom {
+    color: #f87171 !important;
+  }
+
+  .custom-nav-dropdown .text-danger-custom:hover {
+    background-color: rgba(248, 113, 113, 0.08) !important;
+    color: #ef4444 !important;
+  }
+
+  .custom-nav-dropdown .dropdown-divider-custom {
+    border-top: 1px solid #222;
+    margin: 6px 0;
+  }
+
+  /* navbar */
+.navbar {
+    background: rgba(10, 10, 10, .7);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar .nav-link {
+    position: relative;
+    color: #ddd !important;
+    font-weight: 500;
+    transition: .3s;
+    padding-bottom: 6px;
+}
+
+.navbar .nav-link::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: #9d69ff;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.navbar .nav-link:hover {
+    color: #9d69ff !important;
+}
+
+.navbar .nav-link:hover::before {
+    width: 70%;
+}
+
+.navbar .nav-link.active {
+    color: #9d69ff !important;
+}
+
+.navbar .nav-link.active::before {
+    width: 70%;
+}
+
+/* input search game */
+.search-game {
+    width: 260px;
+    height: 42px;
+    padding-left: 15px;
+    background: #111;
+    border: 1px solid #ffffff;
+    color: white;
+    border-radius: 10px;
+}
+
+.search-game:focus {
+    background: #111;
+    color: white;
+    border-color: #8a4dff;
+    box-shadow: none;
+}
+
+.search-game::placeholder {
+    color: white;
+    opacity: 0.5;
+    font-weight: 500;
+}
+
+/* search result dropdown */
+.search-result {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 420px;
+    background: #1b2230;
+    border-radius: 8px;
+    overflow: hidden;
+    display: none;
+    z-index: 9999;
+    margin-top: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.search-item {
+    display: flex;
+    gap: 12px;
+    padding: 10px;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search-item:hover {
+    background: #2d3647;
+    color: #9d69ff;
+}
+
+.search-img {
+    width: 110px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.search-info {
+    flex: 1;
+}
+
+.search-title {
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.search-price {
+    color: #9fb4d4;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.dropdown button {
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 6px 12px;
+}
+
+/* cart logo */
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    width: 18px;
+    height: 18px;
+    background: #8a4dff;
+    border-radius: 50%;
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-icon {
+    color: white;
+    transition: 0.3s;
+    font-size: 24px;
+    margin-left: 5px;
+}
+
+/* bookmark-icon */
+.bookmark-icon {
+    font-size: 32px;
+    color: white;
+    transition: 0.3s;
+}
+
+.bookmark-icon:hover {
+    color: #9d69ff !important;
+}
+
+/* =========================================
+   KUSTOMISASI NAVBAR & OFFCANVAS CART
+   ========================================= */
+
+/* Teks & Brand */
+.navbar-brand-text { letter-spacing: 0.5px; }
+.text-purple-primary { color: #6f42c1; }
+.text-purple-light { color: #a370f7; }
+.cart-price-sm { font-size: 0.85rem; }
+
+/* Tombol Transparan (Toggler & Search) */
+.btn-transparent-custom { border: none; box-shadow: none; background: transparent; }
+
+/* Badge Keranjang */
+.cart-badge-count { background-color: #8a4dff; font-size: 0.65rem; top: -6px; right: -10px; }
+
+/* Tombol Profil & Gambar */
+.btn-user-dropdown { background: #111; border: 1px solid #333; border-radius: 12px; color: white; }
+.profile-img-sm { border-radius: 50%; object-fit: cover; }
+
+/* Offcanvas Cart Wrapper */
+.offcanvas-custom { background-color: #111111; border-left: 1px solid #222222; width: 400px; }
+.cart-scroll-area { max-height: 65vh; }
+
+/* Item Keranjang */
+.cart-item-box { background-color: #161616; border: 1px solid #222222; }
+.cart-item-img { width: 60px; height: 40px; object-fit: cover; }
+
+/* Tombol Checkout */
+.btn-checkout { background-color: #6f42c1; transition: 0.3s; }
+.btn-checkout:hover { background-color: #5a32a3; color: white; }
