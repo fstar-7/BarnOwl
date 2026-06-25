@@ -9,11 +9,14 @@
 }
 
 .carousel-item {
-    height: 560px;
+    /* HAPUS height: 1000px; */
+    width: 100%;
 }
 
 .carousel-item img {
-    height: 560px;
+    /* HAPUS height: 560px; */
+    width: 100%;
+    aspect-ratio: 2.5 / 1; /* Ini kunci utamanya */
     object-fit: cover;
     filter: brightness(.55);
 }
@@ -110,7 +113,7 @@
 
 .card-img-top {
     width: 100%;
-    height: 340px;
+    aspect-ratio: 3 / 4;
     object-fit: cover;
     transition: .5s;
 }

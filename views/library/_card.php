@@ -43,7 +43,7 @@ $date     = isset($game['purchased_at'])
                             onclick="showDownloadInfo('<?= addslashes($gameName) ?>')">
                         <i class="bi bi-download"></i>
                     </button>
-                    <a href="<?= BASE_URL ?>/games/<?= $gameId ?>"
+                    <a href="<?= BASE_URL ?>/store/<?= $gameId ?>"
                        class="btn btn-outline-secondary btn-sm w-100 py-1 opacity-75"
                        title="Lihat Halaman Toko">
                         <i class="bi bi-shop"></i>

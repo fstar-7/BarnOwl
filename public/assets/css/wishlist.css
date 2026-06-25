@@ -68,20 +68,7 @@
     border-radius: 6px;
 }
 
-/* ── Buy Button (shared style dengan Library) ── */
-.btn-play {
-    background-color: #6f42c1;
-    border: none;
-    color: white;
-    font-weight: 600;
-    transition: 0.2s ease-in-out;
-}
 
-.btn-play:hover {
-    background-color: #5a32a3;
-    color: white;
-    box-shadow: 0 0 15px rgba(111, 66, 193, 0.5);
-}
 
 /* ── Empty State ── */
 .wishlist-empty {

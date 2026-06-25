@@ -2,7 +2,7 @@
     <h4 class="top-selling-title mb-3">Top Selling This Week</h4>
     <div class="small-grid">
         <?php foreach ($topSelling as $top) : ?>
-            <a href="<?= BASE_URL ?>/games/<?= (int) $top['id'] ?>"
+            <a href="<?= BASE_URL ?>/store/<?= (int) $top['id'] ?>"
                class="text-decoration-none small-card d-block">
                 <img src="<?= BASE_URL ?>/assets/img/games/<?= SanitizeHelper::escape($top['thumbnail']) ?>"
                      alt="<?= SanitizeHelper::escape($top['name']) ?>"

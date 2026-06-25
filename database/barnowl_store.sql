@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2026 at 05:47 AM
+-- Generation Time: Jun 25, 2026 at 11:49 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -72,12 +72,12 @@ CREATE TABLE `carousel` (
 --
 
 INSERT INTO `carousel` (`id`, `title`, `subtitle`, `description`, `image`, `order`, `is_active`, `game_id`) VALUES
-(1, 'Cyber Horizon', 'NOW AVAILABLE', 'Rasakan dunia cyberpunk yang tak terbatas.', 'carousel1.jpg', 1, 1, 1),
-(2, 'Lost Archipelago', 'NEW RELEASE', 'Bertahan hidup di pulau yang penuh misteri.', 'carousel2.jpg', 2, 1, 3),
-(3, 'Void Hunters', 'PLAY WITH FRIENDS', 'Co-op horror yang akan membuatmu tegang.', 'carousel3.jpg', 3, 1, 5),
-(4, 'Cyber Horizon', 'NOW AVAILABLE', 'Rasakan dunia cyberpunk yang tak terbatas.', 'carousel1.jpg', 1, 1, 1),
-(5, 'Lost Archipelago', 'NEW RELEASE', 'Bertahan hidup di pulau yang penuh misteri.', 'carousel2.jpg', 2, 1, 3),
-(6, 'Void Hunters', 'PLAY WITH FRIENDS', 'Co-op horror yang akan membuatmu tegang.', 'carousel3.jpg', 3, 1, 5);
+(1, 'SCRAPWORLD: DUST & DIESEL', 'NOW AVAILABLE', 'Rasakan dunia cyberpunk yang tak terbatas.', 'scrapworld.png', 1, 1, 1),
+(2, 'Voidborn: Echoes of the Eclipse', 'NEW RELEASE', 'Bertahan hidup di pulau yang penuh misteri.', 'voidborn.png', 2, 1, 2),
+(3, 'CubeForge: Deep Earth', 'PLAY WITH FRIENDS', 'Co-op horror yang akan membuatmu tegang.', 'cubeforge.png', 3, 1, 5),
+(4, 'Anima-L', 'NOW AVAILABLE', 'Rasakan dunia cyberpunk yang tak terbatas.', 'anima-l.png', 4, 1, 4),
+(5, 'Amberwood Grove', 'NEW RELEASE', 'Bertahan hidup di pulau yang penuh misteri.', 'amberwood.png', 5, 1, 5),
+(6, 'Shattered Nexus', 'MOBA', 'Co-op horror yang akan membuatmu tegang.', 'nexus.png', 6, 1, 6);
 
 -- --------------------------------------------------------
 
@@ -118,12 +118,12 @@ CREATE TABLE `game` (
 --
 
 INSERT INTO `game` (`id`, `name`, `description`, `thumbnail`, `banner`, `price`, `discount`, `rating`, `views`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Cyber Horizon', 'Open world action RPG di dunia cyberpunk.', 'game1.png', NULL, 350000, 20, 4.8, 15200, 'featured', '2026-06-24 09:29:36', '2026-06-24 09:29:36'),
-(2, 'Shadow Realm', 'Action game dengan mekanik stealth.', 'game2.png', NULL, 199000, 0, 4.5, 8700, 'featured', '2026-06-24 09:29:36', '2026-06-24 09:29:36'),
-(3, 'Lost Archipelago', 'Survival adventure di pulau terpencil.', 'game3.png', NULL, 249000, 10, 4.6, 12300, 'new_release', '2026-06-24 09:29:36', '2026-06-24 09:29:36'),
-(4, 'Pixel Kingdom', 'Strategy game berbasis pixel art.', 'game4.png', NULL, 0, 0, 4.2, 5400, 'featured', '2026-06-24 09:29:36', '2026-06-24 09:29:36'),
-(5, 'Void Hunters', 'Co-op horror shooter.', 'game5.png', NULL, 159000, 30, 4.7, 9800, 'new_release', '2026-06-24 09:29:36', '2026-06-24 09:29:36'),
-(6, 'Cyber Horizon', 'Open world action RPG di dunia cyberpunk.', 'game1.png', NULL, 350000, 20, 4.8, 15200, 'featured', '2026-06-25 00:59:51', '2026-06-25 00:59:51'),
+(1, 'Scrapworld: Dust & Diesel', 'Welcome to Scrapworld, a barren post-apocalyptic wasteland where the law no longer exists. Take control of your custom-built monster vehicles, lead a gang of outlaws, and fight for survival amidst deadly sandstorms and ruthless enemy factions. Dust, diesel, and blood—the choice is yours.', 'scrapworld.png', 'scrapworld.png', 350000, 20, 4.8, 15200, 'featured', '2026-06-24 09:29:36', '2026-06-25 07:09:49'),
+(2, 'Voidborn: Echoes of the Eclipse', 'Awaken as a soulless warrior in a dying gothic world consumed by an eternal cosmic eclipse. Armed with a mystical spear and bounded by a tragic destiny, wander through foggy ruins, challenge fallen gods, and harness the volatile power of the Void. Can you survive the echoes of the eclipse?', 'voidborn.png', 'voidborn.png', 199000, 0, 4.5, 8700, 'featured', '2026-06-24 09:29:36', '2026-06-25 08:03:18'),
+(3, 'CubeForge: Deep Earth', 'Dig deep into a completely destructible blocky world in CubeForge: Deep Earth! Build massive automated mines, craft unique steampunk machinery, and defend your underground colonies from ancient mechanical threats. Grab your pickaxe—adventure awaits in the depths!', 'cubeforge.png', 'cubeforge.png', 249000, 10, 4.6, 12300, 'featured', '2026-06-24 09:29:36', '2026-06-25 08:57:12'),
+(4, 'Anima-L', 'Hack, upgrade, and fight alongside bio-mechanical beasts in Anima-L! In a neon-drenched cyberpunk world ruled by corrupt mega-corporations, tame digital monsters, equip them with lethal laser weapons and high-tech gadgets, and execute high-stakes tactical heists to liberate the city.', 'anima-l.png', 'anima-l.png', 0, 0, 4.2, 5400, 'featured', '2026-06-24 09:29:36', '2026-06-25 08:38:07'),
+(5, 'Amberwood Grove', 'Escape to a magical countryside in Amberwood Grove! Inherit a hidden cottage, grow glowing mystical crops, brew helpful herbal potions for the local villagers, and befriend the whimsical spirits of the forest in this cozy pixel-art witchcraft farming sim.', 'amberwood.png', 'amberwood.png', 159000, 30, 4.7, 9800, 'new_release', '2026-06-24 09:29:36', '2026-06-25 09:10:10'),
+(6, 'Shattered Nexus', 'Magic vs. Technology Warfare: Choose your side or mix the ultimate team. Dominate the arena by combining the raw, destructive power of ancient elemental sorcery and divine magic with the precision, firepower, and shields of cutting-edge futuristic technology.', 'nexus.png', 'nexus.png', 350000, 20, 4.8, 15200, 'featured', '2026-06-25 00:59:51', '2026-06-25 09:25:32'),
 (7, 'Shadow Realm', 'Action game dengan mekanik stealth.', 'game2.png', NULL, 199000, 0, 4.5, 8700, 'featured', '2026-06-25 00:59:51', '2026-06-25 00:59:51'),
 (8, 'Lost Archipelago', 'Survival adventure di pulau terpencil.', 'game3.png', NULL, 249000, 10, 4.6, 12300, 'new_release', '2026-06-25 00:59:51', '2026-06-25 00:59:51'),
 (9, 'Pixel Kingdom', 'Strategy game berbasis pixel art.', 'game4.png', NULL, 0, 0, 4.2, 5400, 'featured', '2026-06-25 00:59:51', '2026-06-25 00:59:51'),
@@ -318,7 +318,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `username`, `email`, `password`, `role`, `avatar`, `created_at`, `updated_at`) VALUES
 (1, 'admin', 'admin@barnowl.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', NULL, '2026-06-24 09:29:36', '2026-06-24 09:29:36'),
 (2, 'Akmal', 'Akmal@mas.com', '$2y$10$DjI5q9h9EVhgzYG0iuSpButRIpRnLyFSB7swo9N1d/TfX78TLyE6m', 'user', NULL, '2026-06-24 10:27:57', '2026-06-24 10:27:57'),
-(4, 'egi', 'egi@gm.com', 'sayasukafina', 'admin', NULL, '2026-06-25 01:35:36', '2026-06-25 01:35:36');
+(4, 'egi', 'egi@gm.com', '$2y$10$BvDyOgrzt0zbkh1d1.NAkeq5IsUI7Qw6kvZaoeyZC75TlwGkTT86a', 'admin', NULL, '2026-06-25 01:35:36', '2026-06-25 04:07:48');
 
 -- --------------------------------------------------------
 
@@ -332,6 +332,13 @@ CREATE TABLE `wishlist` (
   `game_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `wishlist`
+--
+
+INSERT INTO `wishlist` (`id`, `user_id`, `game_id`, `created_at`) VALUES
+(1, 4, 1, '2026-06-25 04:10:54');
 
 --
 -- Indexes for dumped tables
@@ -525,7 +532,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

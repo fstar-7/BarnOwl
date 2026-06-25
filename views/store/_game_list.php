@@ -77,7 +77,7 @@
 
                     <!-- Action Overlay -->
                     <div class="card-action-overlay">
-                        <a href="<?= BASE_URL ?>/games/<?= (int) $game['id'] ?>"
+                        <a href="<?= BASE_URL ?>/store/<?= (int) $game['id'] ?>"
                            class="btn-overlay-action btn-details" title="View Details">
                             <i class="bi bi-eye-fill"></i>
                         </a>

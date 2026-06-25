@@ -3,6 +3,7 @@
 
 # Folder upload gambar (bisa besar, simpan di server langsung)
 /public/assets/img/games/
+/public/assets/img/banner/
 /public/assets/img/carousel/
 /public/assets/img/avatars/
 

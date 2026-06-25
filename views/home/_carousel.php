@@ -24,7 +24,7 @@
                     <p><?= SanitizeHelper::escape($slide['description']) ?></p>
 
                     <?php if ($slide['game_id']) : ?>
-                        <a href="<?= BASE_URL ?>/games/<?= (int) $slide['game_id'] ?>" class="hero-btn">
+                        <a href="<?= BASE_URL ?>/store/<?= (int) $slide['game_id'] ?>" class="hero-btn">
                             Lihat Game
                         </a>
                     <?php else : ?>

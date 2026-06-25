@@ -4,7 +4,7 @@
     <?php foreach ($featuredGames as $game) : ?>
         <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
             <div class="card game-card clickable-card"
-                 onclick="window.location='<?= BASE_URL ?>/games/<?= (int) $game['id'] ?>'">
+                 onclick="window.location='<?= BASE_URL ?>/store/<?= (int) $game['id'] ?>'">
 
                 <img src="<?= BASE_URL ?>/assets/img/games/<?= SanitizeHelper::escape($game['thumbnail']) ?>"
                      class="card-img-top" alt="<?= SanitizeHelper::escape($game['name']) ?>">

@@ -7,7 +7,7 @@ $router->get('/',      'HomeController@index');
 
 // ── Store & Game ──
 $router->get('/store',      'StoreController@index');
-$router->get('/games/:id',  'StoreController@detail');
+$router->get('/store/:id',  'StoreController@detail');
 
 // ── Auth ──
 $router->post('/login',    'AuthController@login');
