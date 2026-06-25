@@ -1,0 +1,424 @@
+/* =========================================
+   STORE PAGE — store.css
+   ========================================= */
+
+:root {
+    --purple:      #8b5cf6;
+    --card-bg:     #111827;
+    --purple-glow: rgba(139, 92, 246, 0.4);
+}
+
+/* ── Layout ── */
+.store-container {
+    max-width: 1400px;
+    margin: auto;
+    padding: 30px;
+}
+
+.store-layout {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 25px;
+}
+
+/* ── Hero ── */
+.store-hero {
+    background: linear-gradient(rgba(7,9,18,.4), rgba(7,9,18,.9)),
+                url('https://images.unsplash.com/photo-1542751371-adc38448a05e')
+                center/cover no-repeat;
+    border-radius: 20px;
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    padding: 40px 60px;
+    border: 1px solid #1e293b;
+}
+
+.store-hero h1 {
+    font-size: 50px;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+.store-hero h1 span {
+    color: var(--purple);
+    text-shadow: 0 0 15px var(--purple-glow);
+}
+
+.store-hero-label {
+    color: var(--purple);
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+    background: #0b1020;
+    border-radius: 16px;
+    padding: 20px;
+    height: fit-content;
+    border: 1px solid #1e293b;
+    position: sticky;
+    top: 90px;
+}
+
+.sidebar-title { font-size: 1.1rem; }
+
+.filter-reset-link {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    text-decoration: none;
+}
+
+.filter-reset-link:hover { color: white; }
+
+.filter-group {
+    margin-bottom: 25px;
+    border-bottom: 1px solid #1e293b;
+    padding-bottom: 15px;
+}
+
+.filter-group:last-child { border: none; }
+
+.filter-label {
+    margin-bottom: 15px;
+    color: #94a3b8;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}
+
+.filter-search-icon {
+    background: #0d1117;
+    border-color: #334155;
+    color: #94a3b8;
+}
+
+.filter-search-input {
+    background: #0d1117 !important;
+    color: white !important;
+    border-color: #334155 !important;
+    font-size: 0.8rem;
+}
+
+.filter-search-input::placeholder { color: #475569; }
+
+.genre-scroll-container {
+    max-height: 180px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.genre-scroll-container::-webkit-scrollbar       { width: 5px; }
+.genre-scroll-container::-webkit-scrollbar-track { background: #070912; border-radius: 10px; }
+.genre-scroll-container::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+.genre-scroll-container::-webkit-scrollbar-thumb:hover { background: var(--purple); }
+
+.genre-item       { margin-bottom: 6px; }
+.genre-item label { cursor: pointer; font-size: 0.9rem; }
+
+/* ── Products Top Bar ── */
+.products-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.products-count { font-size: 0.95rem; }
+
+.store-sort-select {
+    background: #0d1117;
+    color: white;
+    border-color: #334155;
+    font-size: 0.9rem;
+    border-radius: 8px;
+}
+
+/* ── Quick Tags ── */
+.quick-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.tag-bubble {
+    background: #111827;
+    border: 1px solid #1e293b;
+    color: #94a3b8;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.tag-bubble:hover {
+    border-color: var(--purple);
+    color: white;
+    background: rgba(139, 92, 246, 0.1);
+    transform: translateY(-2px);
+}
+
+.tag-bubble.active {
+    background: var(--purple);
+    border-color: var(--purple);
+    color: white;
+    box-shadow: 0 0 12px var(--purple-glow);
+}
+
+/* ── Games Grid ── */
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+/* ── Game Card ── */
+.store-page .game-card {
+    background: var(--card-bg);
+    border: 1px solid #1f2937;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.store-page .game-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--purple);
+    box-shadow: 0 12px 30px rgba(139, 92, 246, 0.3);
+}
+
+.store-page .card-image {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+}
+
+.store-page .game-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.store-page .game-card:hover img { transform: scale(1.08); }
+
+/* ── Action Overlay ── */
+.card-action-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(7,9,18,.85) 30%, rgba(7,9,18,.2));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 5;
+}
+
+.store-page .game-card:hover .card-action-overlay { opacity: 1; }
+
+.btn-overlay-action {
+    background: var(--purple);
+    border: none;
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,.3);
+}
+
+.btn-overlay-action:hover {
+    background: #7c3aed;
+    transform: scale(1.1);
+    color: white;
+    box-shadow: 0 0 15px var(--purple);
+}
+
+.btn-overlay-action.btn-details {
+    background: white;
+    color: #070912;
+}
+
+.btn-overlay-action.btn-details:hover {
+    background: #f3f4f6;
+    color: #070912;
+}
+
+.btn-overlay-action.btn-wishlisted { background: #dc2626; }
+.btn-overlay-action.btn-wishlist   { background: #111827; border: 1px solid #334155; }
+
+/* ── Status Badges ── */
+.status-badge-container {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 10;
+}
+
+.badge-dynamic {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    width: fit-content;
+}
+
+.badge-discount { background: #16a34a; color: white; }
+.badge-hot      { background: linear-gradient(45deg, #ef4444, #f97316); color: white; }
+.badge-top      { background: linear-gradient(45deg, #eab308, #ca8a04); color: black; }
+.badge-new      { background: linear-gradient(45deg, #3b82f6, #06b6d4); color: white; }
+
+/* ── Card Body ── */
+.store-page .card-body {
+    background: var(--card-bg) !important;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.game-card-title {
+    color: white;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+}
+
+.game-rating { font-size: 12px; color: #94a3b8; }
+
+.store-page .old-price {
+    text-decoration: line-through;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.store-page .new-price {
+    color: #a78bfa;
+    font-weight: 800;
+    font-size: 1.15rem;
+}
+
+/* ── Empty State ── */
+.store-empty {
+    text-align: center;
+    padding: 3rem 0;
+    color: #6b7280;
+    font-size: 3rem;
+}
+
+.store-empty h5 { font-size: 1rem; color: #94a3b8; }
+
+/* ── Sale Banner ── */
+.sale-banner {
+    margin-top: 50px;
+    border-radius: 20px;
+    padding: 40px;
+    aspect-ratio: 3.9 / 1;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid #a78bfa;
+    overflow: hidden;
+}
+
+.sale-accent {
+    color: #c4b5fd;
+    font-weight: 800;
+}
+
+.sale-btn { width: fit-content; }
+
+/* ── Top Selling ── */
+.top-selling-title { font-size: 1.2rem; font-weight: 700; }
+
+.small-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+}
+
+.small-card {
+    background: #111827;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #1f2937;
+    transition: 0.2s;
+}
+
+.small-card:hover {
+    border-color: var(--purple);
+    transform: scale(1.03);
+}
+
+.small-card img {
+    width: 100%;
+    height: 110px;
+    object-fit: cover;
+}
+
+.small-card p {
+    padding: 8px 12px;
+    margin: 0;
+    color: #9ca3af;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ── Pagination ── */
+.pagination .page-link {
+    background: #111827;
+    color: white;
+    border: 1px solid #1f2937;
+    padding: 10px 16px;
+}
+
+.pagination .active .page-link {
+    background: var(--purple);
+    border-color: var(--purple);
+}
+
+.pagination .page-link:hover {
+    background: #1f2937;
+    color: var(--purple);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1200px) {
+    .games-grid { grid-template-columns: repeat(2, 1fr); }
+    .small-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .store-layout { grid-template-columns: 1fr; }
+    .games-grid   { grid-template-columns: 1fr; }
+    .store-hero   { padding: 30px; }
+    .store-hero h1 { font-size: 32px; }
+}

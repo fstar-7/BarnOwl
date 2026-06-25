@@ -11,7 +11,6 @@
 
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/global.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/navbar.css">
-    
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/footer.css">
 
     <?php foreach ($extraCss as $css) : ?>

@@ -1,22 +1,28 @@
 <?php
-// Panggil Router
+
 $router = new Router();
 
-// ==========================================
-// DAFTAR URL WEB BARNOWL ADA DI SINI
-// Format: $router->get('/nama-url', 'NamaController@namaFungsi');
-// ==========================================
+// ── Halaman Utama ──
+$router->get('/',      'HomeController@index');
 
-// Rute Halaman Utama
-$router->get('/', 'HomeController@index');
+// ── Store & Game ──
+$router->get('/store',      'StoreController@index');
+$router->get('/games/:id',  'StoreController@detail');
 
-// Contoh Rute Katalog Game (Hanya contoh, belum bisa diklik dulu)
-$router->get('/games', 'GameController@index');
-
-// Contoh Rute Detail Game dengan ID (Misal: /games/1)
-$router->get('/games/:id', 'GameController@show');
-
-// Tambahkan 3 baris ini di daftar rute kamu:
-$router->post('/login', 'AuthController@login');
+// ── Auth ──
+$router->post('/login',    'AuthController@login');
 $router->post('/register', 'AuthController@register');
-$router->get('/logout', 'AuthController@logout');
+$router->get('/logout',    'AuthController@logout');
+
+// ── Library ──
+$router->get('/library', 'LibraryController@index');
+
+// ── Wishlist ──
+$router->get('/wishlist',            'WishlistController@index');
+$router->get('/wishlist/add/:id',    'WishlistController@add');
+$router->get('/wishlist/remove/:id', 'WishlistController@remove');
+$router->get('/wishlist/toggle/:id', 'WishlistController@toggle');
+
+// ── Support ──
+$router->get('/support',         'SupportController@index');
+$router->post('/support/submit', 'SupportController@submit');

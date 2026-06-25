@@ -1,67 +1,75 @@
 <?php
 
 class AuthController extends Controller {
-    
-    public function login() {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
 
-            $userModel = $this->model('User');
-            $user = $userModel->findByUsername($username);
+    public function login(): void {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->redirect('/');
+        }
 
-            // Cek apakah user ada DAN passwordnya cocok (di-verify dengan hash di DB)
-            if ($user && password_verify($password, $user['password'])) {
-                // Set Session Login
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['username'] = $user['username'];
-                $_SESSION['role'] = $user['role'];
+        $username  = trim($_POST['username'] ?? '');
+        $password  = $_POST['password'] ?? '';
+        $userModel = $this->model('User');
+        $user      = $userModel->findByUsername($username);
 
-                // Redirect kembali ke halaman utama
-                header('Location: ' . BASE_URL . '/');
-                exit;
-            } else {
-                // Jika gagal (Nanti kita bisa ganti dengan sistem Toast)
-                echo "<script>alert('Username atau Password salah!'); window.history.back();</script>";
-                exit;
-            }
+        if ($user && password_verify($password, $user['password'])) {
+            $_SESSION['user_id']  = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['role']     = $user['role'];
+
+            self::setToast('Selamat datang kembali, ' . $user['username'] . '!', 'success');
+            $this->redirect('/');
+        } else {
+            self::setToast('Username atau Password salah!', 'danger');
+            $this->redirectBack();
         }
     }
 
-    public function register() {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $username = $_POST['username'];
-            $email = $_POST['email'];
-            $password = $_POST['password'];
+    public function register(): void {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->redirect('/');
+        }
 
-            $userModel = $this->model('User');
+        $username  = trim($_POST['username'] ?? '');
+        $email     = trim($_POST['email']    ?? '');
+        $password  = $_POST['password']      ?? '';
+        $userModel = $this->model('User');
 
-            // 1. Validasi: Pastikan Username dan Email belum dipakai
-            if ($userModel->findByUsername($username)) {
-                echo "<script>alert('Username sudah terdaftar!'); window.history.back();</script>";
-                exit;
-            }
-            if ($userModel->findByEmail($email)) {
-                echo "<script>alert('Email sudah terdaftar!'); window.history.back();</script>";
-                exit;
-            }
+        if (empty($username) || empty($email) || empty($password)) {
+            self::setToast('Semua field wajib diisi!', 'warning');
+            $this->redirectBack();
+        }
 
-            // 2. Eksekusi Pendaftaran
-            if ($userModel->register($username, $email, $password)) {
-                echo "<script>alert('Registrasi berhasil! Silakan Login.'); window.location.href='" . BASE_URL . "/';</script>";
-                exit;
-            } else {
-                echo "<script>alert('Gagal mendaftar. Terjadi kesalahan sistem.'); window.history.back();</script>";
-                exit;
-            }
+        if ($userModel->findByUsername($username)) {
+            self::setToast('Username sudah terdaftar!', 'warning');
+            $this->redirectBack();
+        }
+
+        if ($userModel->findByEmail($email)) {
+            self::setToast('Email sudah digunakan!', 'warning');
+            $this->redirectBack();
+        }
+
+        if ($userModel->register($username, $email, $password)) {
+            self::setToast('Registrasi berhasil! Silakan Sign In.', 'success');
+            $this->redirect('/');
+        } else {
+            self::setToast('Gagal mendaftar. Terjadi kesalahan sistem.', 'danger');
+            $this->redirectBack();
         }
     }
 
-    public function logout() {
-        // Hapus semua data sesi
+    public function logout(): void {
         session_unset();
         session_destroy();
-        header('Location: ' . BASE_URL . '/');
+        session_start();
+        self::setToast('Anda telah berhasil logout.', 'info');
+        $this->redirect('/');
+    }
+
+    private function redirectBack(): void {
+        $referer = $_SERVER['HTTP_REFERER'] ?? BASE_URL . '/';
+        header('Location: ' . $referer);
         exit;
     }
 }

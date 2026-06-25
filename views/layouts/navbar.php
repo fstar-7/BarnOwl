@@ -13,7 +13,7 @@
     <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
       <div class="navbar-nav d-flex gap-3 align-items-center">
         <a class="nav-link <?= ($currentRoute == '') ? 'active' : '' ?>" href="<?= BASE_URL ?>/">Home</a>
-        <a class="nav-link <?= ($currentRoute == 'games') ? 'active' : '' ?>" href="<?= BASE_URL ?>/games">Store</a>
+        <a class="nav-link <?= ($currentRoute == 'games') ? 'active' : '' ?>" href="<?= BASE_URL ?>/store">Store</a>
         <a class="nav-link <?= ($currentRoute == 'library') ? 'active' : '' ?>" href="<?= BASE_URL ?>/library">Library</a>
         <a class="nav-link <?= ($currentRoute == 'wishlist') ? 'active' : '' ?>" href="<?= BASE_URL ?>/wishlist">Wishlist</a>
         <a class="nav-link <?= ($currentRoute == 'support') ? 'active' : '' ?>" href="<?= BASE_URL ?>/support">Support</a>

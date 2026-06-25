@@ -3,7 +3,14 @@
 class Genre extends Model {
 
     /**
-     * Ambil genre beserta jumlah game-nya, urut dari terbanyak.
+     * Ambil semua genre (untuk sidebar filter di store).
+     */
+    public function getAll(): array {
+        return $this->db->query("SELECT * FROM genre ORDER BY name ASC")->fetchAll();
+    }
+
+    /**
+     * Ambil genre beserta jumlah game-nya (untuk section kategori di home).
      */
     public function getWithGameCount(int $limit = 6): array {
         $stmt = $this->db->prepare("
