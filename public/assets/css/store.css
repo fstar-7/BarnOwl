@@ -201,7 +201,7 @@
 .store-page .card-image {
     position: relative;
     width: 100%;
-    aspect-ratio: 3 / 4;
+    height: 240px;
     overflow: hidden;
 }
 

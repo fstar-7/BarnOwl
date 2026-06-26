@@ -67,3 +67,9 @@
     color: white;
     box-shadow: 0 0 15px rgba(111, 66, 193, 0.5);
 }
+
+/* ── Toast styles (dipakai di public & admin) ── */
+.toast-success { background-color: #16a34a; }
+.toast-danger  { background-color: #dc2626; }
+.toast-warning { background-color: #d97706; }
+.toast-info    { background-color: #8a4dff; }

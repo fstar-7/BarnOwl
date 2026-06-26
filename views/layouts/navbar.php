@@ -54,7 +54,7 @@
           <ul class="dropdown-menu dropdown-menu-end custom-nav-dropdown mt-2" aria-labelledby="userDropdown">
             <?php if (AuthHelper::isAdmin()) : ?>
               <li>
-                <a class="dropdown-item fw-bold text-danger-custom" href="<?= BASE_URL ?>/admin/dashboard">
+                <a class="dropdown-item fw-bold text-danger-custom" href="<?= BASE_URL ?>/admin">
                   <i class="bi bi-shield-lock-fill me-2"></i> Admin Panel
                 </a>
               </li>

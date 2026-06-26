@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2026 at 11:49 AM
+-- Generation Time: Jun 26, 2026 at 03:17 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -72,11 +72,11 @@ CREATE TABLE `carousel` (
 --
 
 INSERT INTO `carousel` (`id`, `title`, `subtitle`, `description`, `image`, `order`, `is_active`, `game_id`) VALUES
-(1, 'SCRAPWORLD: DUST & DIESEL', 'NOW AVAILABLE', 'Rasakan dunia cyberpunk yang tak terbatas.', 'scrapworld.png', 1, 1, 1),
-(2, 'Voidborn: Echoes of the Eclipse', 'NEW RELEASE', 'Bertahan hidup di pulau yang penuh misteri.', 'voidborn.png', 2, 1, 2),
-(3, 'CubeForge: Deep Earth', 'PLAY WITH FRIENDS', 'Co-op horror yang akan membuatmu tegang.', 'cubeforge.png', 3, 1, 5),
-(4, 'Anima-L', 'NOW AVAILABLE', 'Rasakan dunia cyberpunk yang tak terbatas.', 'anima-l.png', 4, 1, 4),
-(5, 'Amberwood Grove', 'NEW RELEASE', 'Bertahan hidup di pulau yang penuh misteri.', 'amberwood.png', 5, 1, 5),
+(1, 'SCRAPWORLD: DUST & DIESEL', 'NOW AVAILABLE', 'Rasakan dunia cyberpunk yang tak terbatas.', 'scrapworld.png', 2, 1, 1),
+(2, 'Voidborn: Echoes of the Eclipse', 'NEW RELEASE', 'Bertahan hidup di pulau yang penuh misteri.', 'voidborn.png', 3, 1, 2),
+(3, 'CubeForge: Deep Earth', 'PLAY WITH FRIENDS', 'Co-op horror yang akan membuatmu tegang.', 'cubeforge.png', 4, 1, 5),
+(4, 'Anima-L', 'NOW AVAILABLE', 'Rasakan dunia cyberpunk yang tak terbatas.', 'anima-l.png', 5, 1, 4),
+(5, 'Amberwood Grove', 'NEW RELEASE', 'Bertahan hidup di pulau yang penuh misteri.', 'amberwood.png', 1, 1, 5),
 (6, 'Shattered Nexus', 'MOBA', 'Co-op horror yang akan membuatmu tegang.', 'nexus.png', 6, 1, 6);
 
 -- --------------------------------------------------------

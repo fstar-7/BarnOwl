@@ -67,9 +67,4 @@ class AuthController extends Controller {
         $this->redirect('/');
     }
 
-    private function redirectBack(): void {
-        $referer = $_SERVER['HTTP_REFERER'] ?? BASE_URL . '/';
-        header('Location: ' . $referer);
-        exit;
-    }
 }

@@ -13,9 +13,9 @@
 
                 <main>
                     <?php include __DIR__ . '/_game_list.php'; ?>
-                    <?php include __DIR__ . '/_pagination.php'; ?>
                     <?php include __DIR__ . '/_sale_banner.php'; ?>
                     <?php include __DIR__ . '/_top_selling.php'; ?>
+                    <?php include __DIR__ . '/_pagination.php'; ?>
                 </main>
 
             </div>
