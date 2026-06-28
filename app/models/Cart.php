@@ -43,11 +43,35 @@ class Cart extends Model {
         return $stmt->execute([':user_id' => $userId, ':game_id' => $gameId]);
     }
 
+    /**
+     * Cek apakah game tertentu sudah ada di keranjang user.
+     * Dipakai di halaman detail untuk menentukan state tombol
+     * (Tambah ke Keranjang / Lihat Keranjang).
+     */
+    public function isInCart(int $userId, int $gameId): bool {
+        $stmt = $this->db->prepare("
+            SELECT id FROM cart
+            WHERE user_id = :user_id AND game_id = :game_id
+            LIMIT 1
+        ");
+        $stmt->execute([':user_id' => $userId, ':game_id' => $gameId]);
+        return $stmt->fetch() !== false;
+    }
+
     public function remove(int $cartId, int $userId): bool {
         $stmt = $this->db->prepare("
             DELETE FROM cart
             WHERE id = :id AND user_id = :user_id
         ");
         return $stmt->execute([':id' => $cartId, ':user_id' => $userId]);
+    }
+
+    /**
+     * Kosongkan seluruh keranjang milik user — dipanggil setelah
+     * checkout berhasil membuat order.
+     */
+    public function clear(int $userId): bool {
+        $stmt = $this->db->prepare("DELETE FROM cart WHERE user_id = :user_id");
+        return $stmt->execute([':user_id' => $userId]);
     }
 }

@@ -42,8 +42,10 @@
                     <td><span class="admin-badge <?= $badgeClass ?>"><?= SanitizeHelper::escape($game['status']) ?></span></td>
                     <td>
                         <a href="<?= BASE_URL ?>/admin/games/edit/<?= (int)$game['id'] ?>" class="btn-icon btn-icon-edit" title="Edit"><i class="bi bi-pencil"></i></a>
-                        <a href="<?= BASE_URL ?>/admin/games/delete/<?= (int)$game['id'] ?>" class="btn-icon btn-icon-del ms-1"
-                           title="Hapus" onclick="return confirm('Hapus game ini?')"><i class="bi bi-trash3"></i></a>
+                        <form action="<?= BASE_URL ?>/admin/games/delete/<?= (int)$game['id'] ?>" method="POST" style="display:inline" onsubmit="return confirm('Hapus game ini?')">
+                            <?= CsrfHelper::field() ?>
+                            <button type="submit" class="btn-icon btn-icon-del ms-1" title="Hapus"><i class="bi bi-trash3"></i></button>
+                        </form>
                     </td>
                 </tr>
                 <?php endforeach; ?>

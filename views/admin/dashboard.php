@@ -74,11 +74,12 @@
                     <td class="text-muted text-sm"><?= date('d M Y', strtotime($order['created_at'])) ?></td>
                     <td>
                         <?php if ($order['status'] === 'pending') : ?>
-                            <a href="<?= BASE_URL ?>/admin/orders/approve/<?= (int) $order['id'] ?>"
-                               class="btn-icon btn-icon-success" title="Approve"
-                               onclick="return confirm('Setujui order ini?')">
-                                <i class="bi bi-check-circle"></i>
-                            </a>
+                            <form action="<?= BASE_URL ?>/admin/orders/approve/<?= (int) $order['id'] ?>" method="POST" style="display:inline" onsubmit="return confirm('Setujui order ini?')">
+                                <?= CsrfHelper::field() ?>
+                                <button type="submit" class="btn-icon btn-icon-success" title="Approve">
+                                    <i class="bi bi-check-circle"></i>
+                                </button>
+                            </form>
                         <?php endif; ?>
                     </td>
                 </tr>
@@ -120,8 +121,10 @@
                     <td><span class="admin-badge <?= $badgeClass ?>"><?= SanitizeHelper::escape($game['status']) ?></span></td>
                     <td>
                         <a href="<?= BASE_URL ?>/admin/games/edit/<?= (int) $game['id'] ?>" class="btn-icon btn-icon-edit"><i class="bi bi-pencil"></i></a>
-                        <a href="<?= BASE_URL ?>/admin/games/delete/<?= (int) $game['id'] ?>" class="btn-icon btn-icon-del ms-1"
-                           onclick="return confirm('Hapus game ini?')"><i class="bi bi-trash3"></i></a>
+                        <form action="<?= BASE_URL ?>/admin/games/delete/<?= (int) $game['id'] ?>" method="POST" style="display:inline" onsubmit="return confirm('Hapus game ini?')">
+                            <?= CsrfHelper::field() ?>
+                            <button type="submit" class="btn-icon btn-icon-del ms-1"><i class="bi bi-trash3"></i></button>
+                        </form>
                     </td>
                 </tr>
                 <?php endforeach; ?>

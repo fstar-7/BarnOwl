@@ -103,6 +103,68 @@ class StoreController extends Controller {
         $this->view('store/index', $data, ['store.css'], ['store.js']);
     }
 
+    /**
+     * GET /store/:id
+     * Halaman detail satu game: info lengkap, harga, tombol cart/wishlist,
+     * serta rekomendasi game lain yang serupa.
+     */
+    public function detail($id): void {
+        $gameId    = (int) $id;
+        $gameModel = $this->model('Game');
+        $game      = $gameModel->findById($gameId);
+
+        if (!$game) {
+            self::setToast('Game tidak ditemukan.', 'danger');
+            $this->redirect('/store');
+        }
+
+        // ── Hitung sekali tambahan view & ambil ulang data terbaru ──
+        $gameModel->incrementViews($gameId);
+        $game['views'] = (int) $game['views'] + 1;
+
+        $price    = (int) $game['price'];
+        $discount = (int) ($game['discount'] ?? 0);
+
+        $game['final_price'] = Game::calcFinalPrice($price, $discount);
+        $game['badge_hot']   = $game['views'] >= 300;
+        $game['badge_top']   = (float) $game['rating'] >= 4.7;
+        $game['badge_new']   = $game['status'] === 'new_release';
+
+        $platforms = $gameModel->getPlatformsByGame($gameId);
+        $related   = $gameModel->getRelated($gameId, 4);
+
+        // Hitung harga final untuk game terkait — logika bisnis tetap
+        // di Controller, View hanya menampilkan (konsisten dengan index()).
+        foreach ($related as &$r) {
+            $r['final_price'] = Game::calcFinalPrice((int) $r['price'], (int) ($r['discount'] ?? 0));
+        }
+        unset($r);
+
+        // ── Status game terhadap user yang sedang login ──
+        $isOwned      = false;
+        $isWishlisted = false;
+        $isInCart     = false;
+
+        if (AuthHelper::isLoggedIn()) {
+            $userId       = AuthHelper::id();
+            $isOwned      = $this->model('Library')->owns($userId, $gameId);
+            $isWishlisted = $this->model('Wishlist')->isWishlisted($userId, $gameId);
+            $isInCart     = $this->model('Cart')->isInCart($userId, $gameId);
+        }
+
+        $data = [
+            'pageTitle'    => $game['name'] . ' | BarnOwl Store',
+            'game'         => $game,
+            'platforms'    => $platforms,
+            'related'      => $related,
+            'isOwned'      => $isOwned,
+            'isWishlisted' => $isWishlisted,
+            'isInCart'     => $isInCart,
+        ];
+
+        $this->view('store/detail', $data, ['store.css', 'detail.css']);
+    }
+
     // ── Helper: pastikan array hanya berisi integer ──
     private function parseIntArray(mixed $input): array {
         if (!is_array($input)) return [];

@@ -193,6 +193,62 @@ class Game extends Model {
         return (int) $this->db->query("SELECT COUNT(*) FROM game")->fetchColumn();
     }
 
+    /**
+     * Ambil daftar platform (id + name) untuk satu game.
+     * Dipakai di halaman detail game.
+     */
+    public function getPlatformsByGame(int $gameId): array {
+        $stmt = $this->db->prepare("
+            SELECT p.id, p.name
+            FROM platform p
+            INNER JOIN game_platform gp ON p.id = gp.platform_id
+            WHERE gp.game_id = :id
+            ORDER BY p.name ASC
+        ");
+        $stmt->execute([':id' => $gameId]);
+        return $stmt->fetchAll();
+    }
+
+    /**
+     * Ambil game lain yang berbagi genre dengan game ini (untuk
+     * section "You May Also Like" di halaman detail).
+     */
+    public function getRelated(int $gameId, int $limit = 4): array {
+        $limit = max(1, $limit);
+        $stmt  = $this->db->prepare("
+            SELECT DISTINCT g.*
+            FROM game g
+            INNER JOIN game_genre gg ON g.id = gg.game_id
+            WHERE gg.genre_id IN (SELECT genre_id FROM game_genre WHERE game_id = ?)
+              AND g.id != ?
+            ORDER BY g.views DESC
+            LIMIT $limit
+        ");
+        $stmt->execute([$gameId, $gameId]);
+        $related = $stmt->fetchAll();
+
+        // Fallback: kalau game ini tidak punya genre / tidak ada game serupa,
+        // tampilkan saja game populer lain biar section tidak kosong.
+        if (empty($related)) {
+            $stmt = $this->db->prepare("
+                SELECT * FROM game WHERE id != ? ORDER BY views DESC LIMIT $limit
+            ");
+            $stmt->execute([$gameId]);
+            $related = $stmt->fetchAll();
+        }
+
+        return $related;
+    }
+
+    /**
+     * Tambah 1 view setiap kali halaman detail game dibuka.
+     * Dipakai juga untuk badge HOT & sorting "Most Popular".
+     */
+    public function incrementViews(int $gameId): void {
+        $stmt = $this->db->prepare("UPDATE game SET views = views + 1 WHERE id = :id");
+        $stmt->execute([':id' => $gameId]);
+    }
+
     public static function calcFinalPrice(int $price, int $discount): int {
         if ($discount <= 0 || $discount > 100) return $price;
         return (int) ($price - ($price * ($discount / 100)));

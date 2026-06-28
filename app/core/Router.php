@@ -43,6 +43,7 @@ class Router {
         }
         
         // Jika tidak ada URL yang cocok
+        http_response_code(404);
         echo "<h1 style='text-align:center; margin-top:50px;'>404 - Halaman Tidak Ditemukan</h1>";
     }
 }

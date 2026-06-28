@@ -20,11 +20,13 @@
                     <td class="text-muted text-sm"><?= date('d M Y', strtotime($ticket['created_at'])) ?></td>
                     <td>
                         <?php if ($ticket['status'] === 'Open') : ?>
-                            <a href="<?= BASE_URL ?>/admin/support/close/<?= (int) $ticket['id'] ?>"
-                               class="btn-revoke"
-                               onclick="return confirm('Tandai tiket ini sebagai selesai?')">
-                                <i class="bi bi-check2-circle me-1"></i>Tutup
-                            </a>
+                            <form action="<?= BASE_URL ?>/admin/support/close/<?= (int) $ticket['id'] ?>" method="POST" style="display:inline"
+                                  onsubmit="return confirm('Tandai tiket ini sebagai selesai?')">
+                                <?= CsrfHelper::field() ?>
+                                <button type="submit" class="btn-revoke">
+                                    <i class="bi bi-check2-circle me-1"></i>Tutup
+                                </button>
+                            </form>
                         <?php else : ?>
                             <span class="text-muted text-sm">— selesai —</span>
                         <?php endif; ?>

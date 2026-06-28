@@ -11,6 +11,7 @@
         <form method="POST"
               action="<?= BASE_URL . ($slide ? '/admin/carousel/update/' . $slide['id'] : '/admin/carousel/store') ?>"
               enctype="multipart/form-data">
+            <?= CsrfHelper::field() ?>
 
             <div class="admin-form-group">
                 <label class="admin-label">

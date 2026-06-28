@@ -15,8 +15,9 @@ class DotEnv {
 
             // Pecah berdasarkan tanda sama dengan (=)
             list($name, $value) = explode('=', $line, 2);
-            $name = trim($name);
+            $name  = trim($name);
             $value = trim($value);
+            $value = trim($value, "\"'"); // buang tanda kutip pembungkus, kalau ada
 
             // Masukkan ke variabel sistem PHP ($_ENV dan getenv)
             if (!array_key_exists($name, $_SERVER) && !array_key_exists($name, $_ENV)) {

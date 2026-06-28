@@ -78,9 +78,15 @@ class Carousel extends Model {
         $currentOrder = (int) $slide['order'];
         $newOrder     = $direction === 'up' ? $currentOrder - 1 : $currentOrder + 1;
 
+        // Jangan geser kalau sudah di posisi paling atas/bawah —
+        // mencegah slide diberi nilai `order` yang tidak dimiliki slide lain.
+        if ($newOrder < 1) return;
+
         // Tukar urutan dengan slide di posisi target
         $stmt = $this->db->prepare("UPDATE carousel SET `order` = :old WHERE `order` = :new");
         $stmt->execute([':old' => $currentOrder, ':new' => $newOrder]);
+
+        if ($stmt->rowCount() === 0) return; // tidak ada slide di posisi target, batalkan
 
         $stmt = $this->db->prepare("UPDATE carousel SET `order` = :new WHERE id = :id");
         $stmt->execute([':new' => $newOrder, ':id' => $id]);

@@ -3,11 +3,7 @@
 class LibraryController extends Controller {
 
     public function index(): void {
-        // ── Proteksi: wajib login ──
-        if (!AuthHelper::isLoggedIn()) {
-            self::setToast('Kamu harus login untuk mengakses Library.', 'warning');
-            $this->redirect('/');
-        }
+        $this->requireLogin('Kamu harus login untuk mengakses Library.', false);
 
         $libraryModel = $this->model('Library');
         $games        = $libraryModel->getByUser(AuthHelper::id());

@@ -28,9 +28,7 @@ class SupportController extends Controller {
      * (Post/Redirect/Get) supaya form tidak ter-submit ulang saat halaman di-refresh.
      */
     public function submit(): void {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $this->redirect('/support');
-        }
+        $this->requirePost('/support');
 
         $nama  = trim(strip_tags($_POST['nama']  ?? ''));
         $email = trim(filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL));

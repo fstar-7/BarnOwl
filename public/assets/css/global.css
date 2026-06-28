@@ -73,3 +73,42 @@
 .toast-danger  { background-color: #dc2626; }
 .toast-warning { background-color: #d97706; }
 .toast-info    { background-color: #8a4dff; }
+
+/* ── Avatar (foto profil / fallback inisial) — dipakai navbar & halaman profile ── */
+.avatar-img, .avatar-fallback {
+    border-radius: 50%;
+    object-fit: cover;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.avatar-fallback {
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.avatar-sm { width: 30px;  height: 30px;  font-size: 0.7rem; }
+.avatar-md { width: 64px;  height: 64px;  font-size: 1.1rem; }
+.avatar-lg { width: 110px; height: 110px; font-size: 2rem; border: 3px solid #8a4dff; }
+
+/* ── Logo badge (bungkus logo jadi lingkaran tanpa memotong ujung gambar) ── */
+.logo-badge {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: #1a1d2e;
+    border: 1px solid rgba(138, 77, 255, .35);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+.logo-badge img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+}

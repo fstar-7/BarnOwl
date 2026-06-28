@@ -1,7 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center fw-bold text-white navbar-brand-text" href="<?= BASE_URL ?>/">
-      <img src="<?= BASE_URL ?>/assets/img/logo.png" alt="Logo" width="38" height="38" class="me-2">
+      <span class="logo-badge me-2">
+        <img src="<?= BASE_URL ?>/assets/img/logo.png" alt="Logo">
+      </span>
       Barn Owl
     </a>
 
@@ -47,7 +49,7 @@
         <div class="dropdown">
           <button class="btn dropdown-toggle d-flex align-items-center gap-2 px-3 py-1.5 btn-user-dropdown"
             type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="<?= BASE_URL ?>/assets/img/profile.jpg" width="30" height="30" class="profile-img-sm">
+            <?= AvatarHelper::render(AuthHelper::avatar(), AuthHelper::username(), 'avatar-sm') ?>
             <span class="small fw-semibold"><?= SanitizeHelper::escape(AuthHelper::username()); ?></span>
           </button>
 

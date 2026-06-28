@@ -18,7 +18,9 @@
     <!-- ── SIDEBAR ── -->
     <aside class="admin-sidebar">
         <a href="<?= BASE_URL ?>/admin" class="sidebar-brand">
-            <img src="<?= BASE_URL ?>/assets/img/logo.png" width="28" height="28" alt="Logo">
+            <span class="logo-badge logo-badge-sm">
+                <img src="<?= BASE_URL ?>/assets/img/logo.png" alt="Logo">
+            </span>
             <span>Barn Owl</span>
         </a>
 
@@ -71,7 +73,7 @@
                 <?= isset($pageTitle) ? SanitizeHelper::escape(explode(' | ', $pageTitle)[0]) : 'Dashboard' ?>
             </span>
             <div class="topbar-user">
-                <div class="topbar-avatar"><?= strtoupper(substr(AuthHelper::username(), 0, 1)) ?></div>
+                <?= AvatarHelper::render(AuthHelper::avatar(), AuthHelper::username(), 'avatar-sm topbar-avatar') ?>
                 <div>
                     <div class="topbar-name"><?= SanitizeHelper::escape(AuthHelper::username()) ?></div>
                     <div class="topbar-role">Administrator</div>

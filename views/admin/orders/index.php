@@ -26,11 +26,13 @@
                     <td class="text-muted text-sm"><?= date('d M Y, H:i', strtotime($order['created_at'])) ?></td>
                     <td>
                         <?php if ($order['status'] === 'pending') : ?>
-                            <a href="<?= BASE_URL ?>/admin/orders/approve/<?= (int) $order['id'] ?>"
-                               class="btn-icon btn-icon-success" title="Approve"
-                               onclick="return confirm('Setujui order ini & masukkan game ke library user?')">
-                                <i class="bi bi-check-circle"></i>
-                            </a>
+                            <form action="<?= BASE_URL ?>/admin/orders/approve/<?= (int) $order['id'] ?>" method="POST" style="display:inline"
+                                  onsubmit="return confirm('Setujui order ini & masukkan game ke library user?')">
+                                <?= CsrfHelper::field() ?>
+                                <button type="submit" class="btn-icon btn-icon-success" title="Approve">
+                                    <i class="bi bi-check-circle"></i>
+                                </button>
+                            </form>
                         <?php else : ?>
                             <span class="text-muted text-sm">—</span>
                         <?php endif; ?>

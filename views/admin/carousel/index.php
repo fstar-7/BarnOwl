@@ -15,11 +15,15 @@
                 <tr>
                     <td>
                         <div class="order-ctrl">
-                            <a href="<?= BASE_URL ?>/admin/carousel/move/<?= (int) $slide['id'] ?>/up"
-                               class="order-btn" title="Naik"><i class="bi bi-caret-up-fill"></i></a>
+                            <form action="<?= BASE_URL ?>/admin/carousel/move/<?= (int) $slide['id'] ?>/up" method="POST" style="display:inline">
+                                <?= CsrfHelper::field() ?>
+                                <button type="submit" class="order-btn order-btn-reset" title="Naik"><i class="bi bi-caret-up-fill"></i></button>
+                            </form>
                             <span class="fw-700"><?= (int) $slide['order'] ?></span>
-                            <a href="<?= BASE_URL ?>/admin/carousel/move/<?= (int) $slide['id'] ?>/down"
-                               class="order-btn" title="Turun"><i class="bi bi-caret-down-fill"></i></a>
+                            <form action="<?= BASE_URL ?>/admin/carousel/move/<?= (int) $slide['id'] ?>/down" method="POST" style="display:inline">
+                                <?= CsrfHelper::field() ?>
+                                <button type="submit" class="order-btn order-btn-reset" title="Turun"><i class="bi bi-caret-down-fill"></i></button>
+                            </form>
                         </div>
                     </td>
                     <td>
@@ -36,23 +40,27 @@
                         <?php endif; ?>
                     </td>
                     <td>
-                        <a href="<?= BASE_URL ?>/admin/carousel/toggle/<?= (int) $slide['id'] ?>"
-                           title="Toggle aktif">
-                            <span class="admin-badge <?= $slide['is_active'] ? 'badge-success' : 'badge-muted' ?>">
-                                <?= $slide['is_active'] ? 'AKTIF' : 'NONAKTIF' ?>
-                            </span>
-                        </a>
+                        <form action="<?= BASE_URL ?>/admin/carousel/toggle/<?= (int) $slide['id'] ?>" method="POST" style="display:inline">
+                            <?= CsrfHelper::field() ?>
+                            <button type="submit" class="order-btn-reset" title="Toggle aktif">
+                                <span class="admin-badge <?= $slide['is_active'] ? 'badge-success' : 'badge-muted' ?>">
+                                    <?= $slide['is_active'] ? 'AKTIF' : 'NONAKTIF' ?>
+                                </span>
+                            </button>
+                        </form>
                     </td>
                     <td>
                         <a href="<?= BASE_URL ?>/admin/carousel/edit/<?= (int) $slide['id'] ?>"
                            class="btn-icon btn-icon-edit" title="Edit">
                             <i class="bi bi-pencil"></i>
                         </a>
-                        <a href="<?= BASE_URL ?>/admin/carousel/delete/<?= (int) $slide['id'] ?>"
-                           class="btn-icon btn-icon-del ms-1" title="Hapus"
-                           onclick="return confirm('Hapus slide ini?')">
-                            <i class="bi bi-trash3"></i>
-                        </a>
+                        <form action="<?= BASE_URL ?>/admin/carousel/delete/<?= (int) $slide['id'] ?>" method="POST" style="display:inline"
+                              onsubmit="return confirm('Hapus slide ini?')">
+                            <?= CsrfHelper::field() ?>
+                            <button type="submit" class="btn-icon btn-icon-del ms-1" title="Hapus">
+                                <i class="bi bi-trash3"></i>
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 <?php endforeach; ?>

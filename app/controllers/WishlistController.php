@@ -7,10 +7,7 @@ class WishlistController extends Controller {
      * Menampilkan seluruh game yang ada di wishlist user yang sedang login.
      */
     public function index(): void {
-        if (!AuthHelper::isLoggedIn()) {
-            self::setToast('Kamu harus login terlebih dahulu untuk mengakses Wishlist.', 'warning');
-            $this->redirect('/');
-        }
+        $this->requireLogin('Kamu harus login terlebih dahulu untuk mengakses Wishlist.', false);
 
         $wishlistModel = $this->model('Wishlist');
         $games         = $wishlistModel->getByUser(AuthHelper::id());
@@ -40,10 +37,7 @@ class WishlistController extends Controller {
     public function add($id): void {
         $gameId = (int) $id;
 
-        if (!AuthHelper::isLoggedIn()) {
-            self::setToast('Kamu harus login untuk menambah ke Wishlist.', 'warning');
-            $this->redirectBack();
-        }
+        $this->requireLogin('Kamu harus login untuk menambah ke Wishlist.');
 
         $userId       = AuthHelper::id();
         $gameModel    = $this->model('Game');
@@ -77,10 +71,7 @@ class WishlistController extends Controller {
     public function remove($id): void {
         $gameId = (int) $id;
 
-        if (!AuthHelper::isLoggedIn()) {
-            self::setToast('Kamu harus login terlebih dahulu.', 'warning');
-            $this->redirectBack();
-        }
+        $this->requireLogin();
 
         $this->model('Wishlist')->remove(AuthHelper::id(), $gameId);
 
@@ -96,10 +87,7 @@ class WishlistController extends Controller {
     public function toggle($id): void {
         $gameId = (int) $id;
 
-        if (!AuthHelper::isLoggedIn()) {
-            self::setToast('Kamu harus login untuk menggunakan Wishlist.', 'warning');
-            $this->redirectBack();
-        }
+        $this->requireLogin('Kamu harus login untuk menggunakan Wishlist.');
 
         $userId       = AuthHelper::id();
         $gameModel    = $this->model('Game');
@@ -127,20 +115,5 @@ class WishlistController extends Controller {
         }
 
         $this->redirectBack();
-    }
-
-    /**
-     * Kembali ke halaman sebelumnya (HTTP_REFERER), dengan validasi
-     * sederhana agar tidak terjadi open-redirect ke domain luar.
-     */
-    private function redirectBack(): void {
-        $referer = $_SERVER['HTTP_REFERER'] ?? (BASE_URL . '/');
-
-        if (stripos($referer, BASE_URL) !== 0) {
-            $referer = BASE_URL . '/';
-        }
-
-        header('Location: ' . $referer);
-        exit;
     }
 }

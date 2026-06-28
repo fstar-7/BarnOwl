@@ -3,9 +3,7 @@
 class AuthController extends Controller {
 
     public function login(): void {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $this->redirect('/');
-        }
+        $this->requirePost();
 
         $username  = trim($_POST['username'] ?? '');
         $password  = $_POST['password'] ?? '';
@@ -13,9 +11,14 @@ class AuthController extends Controller {
         $user      = $userModel->findByUsername($username);
 
         if ($user && password_verify($password, $user['password'])) {
+            // Regenerasi session ID setiap login berhasil — mencegah
+            // Session Fixation (ID session lama tidak ikut "naik level").
+            session_regenerate_id(true);
+
             $_SESSION['user_id']  = $user['id'];
             $_SESSION['username'] = $user['username'];
             $_SESSION['role']     = $user['role'];
+            $_SESSION['avatar']   = $user['avatar'] ?? null;
 
             self::setToast('Selamat datang kembali, ' . $user['username'] . '!', 'success');
             $this->redirect('/');
@@ -26,9 +29,7 @@ class AuthController extends Controller {
     }
 
     public function register(): void {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $this->redirect('/');
-        }
+        $this->requirePost();
 
         $username  = trim($_POST['username'] ?? '');
         $email     = trim($_POST['email']    ?? '');

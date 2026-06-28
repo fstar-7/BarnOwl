@@ -11,6 +11,7 @@
         <form method="POST"
               action="<?= BASE_URL . ($game ? '/admin/games/update/' . $game['id'] : '/admin/games/store') ?>"
               enctype="multipart/form-data">
+            <?= CsrfHelper::field() ?>
 
             <div class="form-row-2">
                 <div class="admin-form-group">

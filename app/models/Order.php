@@ -2,6 +2,50 @@
 
 class Order extends Model {
 
+    /**
+     * Buat order baru dari isi keranjang user (dipanggil saat checkout).
+     * Dibungkus transaction supaya order + order_item konsisten —
+     * kalau salah satu insert gagal, semuanya dibatalkan.
+     *
+     * @param array $cartItems Item dari Cart::getCartSummary()['items']
+     * @return int ID order yang baru dibuat
+     */
+    public function createFromCart(int $userId, array $cartItems): int {
+        $total = 0;
+        foreach ($cartItems as $item) {
+            $total += (int) $item['finalPrice'];
+        }
+
+        $this->db->beginTransaction();
+        try {
+            $stmt = $this->db->prepare("
+                INSERT INTO `order` (user_id, total, status)
+                VALUES (:user_id, :total, 'pending')
+            ");
+            $stmt->execute([':user_id' => $userId, ':total' => $total]);
+            $orderId = (int) $this->db->lastInsertId();
+
+            $stmtItem = $this->db->prepare("
+                INSERT INTO order_item (order_id, game_id, price_at_buy, discount_at_buy)
+                VALUES (:order_id, :game_id, :price, :discount)
+            ");
+            foreach ($cartItems as $item) {
+                $stmtItem->execute([
+                    ':order_id' => $orderId,
+                    ':game_id'  => (int) $item['game_id'],
+                    ':price'    => (int) $item['price'],
+                    ':discount' => (int) ($item['discount'] ?? 0),
+                ]);
+            }
+
+            $this->db->commit();
+            return $orderId;
+        } catch (PDOException $e) {
+            $this->db->rollBack();
+            throw $e;
+        }
+    }
+
     public function getAll(): array {
         $stmt = $this->db->query("
             SELECT o.*, u.username

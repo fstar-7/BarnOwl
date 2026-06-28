@@ -16,7 +16,7 @@
                     <td class="text-muted"><?= $i + 1 ?></td>
                     <td>
                         <div class="d-flex align-items-center gap-2">
-                            <div class="user-avatar"><?= strtoupper(substr($user['username'], 0, 1)) ?></div>
+                            <?= AvatarHelper::render($user['avatar'], $user['username'], 'avatar-sm') ?>
                             <span class="fw-600">@<?= SanitizeHelper::escape($user['username']) ?></span>
                         </div>
                     </td>
@@ -29,11 +29,13 @@
                     <td class="text-muted text-sm"><?= date('d M Y', strtotime($user['created_at'])) ?></td>
                     <td>
                         <?php if ($user['id'] !== AuthHelper::id()) : ?>
-                            <a href="<?= BASE_URL ?>/admin/users/delete/<?= (int)$user['id'] ?>"
-                               class="btn-icon btn-icon-del"
-                               onclick="return confirm('Hapus user @<?= SanitizeHelper::escape($user['username']) ?>?')">
-                                <i class="bi bi-person-x"></i>
-                            </a>
+                            <form action="<?= BASE_URL ?>/admin/users/delete/<?= (int)$user['id'] ?>" method="POST" style="display:inline"
+                                  onsubmit="return confirm('Hapus user @<?= SanitizeHelper::escape($user['username']) ?>?')">
+                                <?= CsrfHelper::field() ?>
+                                <button type="submit" class="btn-icon btn-icon-del">
+                                    <i class="bi bi-person-x"></i>
+                                </button>
+                            </form>
                         <?php else : ?>
                             <span class="text-muted text-sm">— akun aktif —</span>
                         <?php endif; ?>

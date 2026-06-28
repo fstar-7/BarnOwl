@@ -21,4 +21,9 @@ class AuthHelper {
     public static function username() {
         return $_SESSION['username'] ?? 'Guest';
     }
+
+    // Ambil nama file avatar (null kalau belum upload foto -> dipakai AvatarHelper buat fallback inisial)
+    public static function avatar() {
+        return $_SESSION['avatar'] ?? null;
+    }
 }

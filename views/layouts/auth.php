@@ -8,6 +8,7 @@
 
       <!-- Form Login -->
       <form id="loginForm" method="POST" action="<?= BASE_URL ?>/login">
+        <?= CsrfHelper::field() ?>
         <div class="text-center mb-3">
           <img src="<?= BASE_URL ?>/assets/img/logo.png" width="60" alt="Logo">
         </div>
@@ -36,6 +37,7 @@
 
       <!-- Form Register -->
       <form id="registerForm" method="POST" action="<?= BASE_URL ?>/register" style="display:none;">
+        <?= CsrfHelper::field() ?>
         <div class="text-center mb-3">
           <img src="<?= BASE_URL ?>/assets/img/logo.png" width="60" alt="Logo">
         </div>

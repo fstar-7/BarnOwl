@@ -78,9 +78,74 @@ class Controller {
         }
     }
 
-    protected function requirePost(): void {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $this->redirect('/');
+    /**
+     * Pastikan user sudah login, kalau belum tampilkan toast & redirect.
+     * Dipakai untuk menggantikan pola "if (!AuthHelper::isLoggedIn()) {...}"
+     * yang sebelumnya ditulis manual berulang kali di banyak Controller.
+     *
+     * @param string $message     Pesan toast yang ditampilkan.
+     * @param bool   $back        true = redirect ke halaman asal (redirectBack),
+     *                             false = redirect ke homepage.
+     */
+    protected function requireLogin(string $message = 'Kamu harus login terlebih dahulu.', bool $back = true): void {
+        if (!AuthHelper::isLoggedIn()) {
+            if ($message !== '') {
+                self::setToast($message, 'warning');
+            }
+            $back ? $this->redirectBack() : $this->redirect('/');
         }
+    }
+
+    /**
+     * Pastikan request adalah POST DAN token CSRF-nya valid.
+     * Kalau salah satu gagal, user diarahkan ke $wrongMethodRedirect.
+     *
+     * PENTING: setiap <form method="POST"> di view WAJIB menyertakan
+     * <?= CsrfHelper::field() ?> agar tidak selalu ditolak di sini.
+     */
+    protected function requirePost(string $wrongMethodRedirect = '/'): void {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->redirect($wrongMethodRedirect);
+        }
+
+        if (!CsrfHelper::verify($_POST['csrf_token'] ?? null)) {
+            self::setToast('Sesi form sudah kedaluwarsa. Silakan coba lagi.', 'danger');
+            $this->redirect($wrongMethodRedirect);
+        }
+    }
+
+    /**
+     * Helper upload gambar generik (dipakai AdminBaseController & ProfileController).
+     *
+     * Validasi 2 lapis:
+     *  1. Ekstensi file (whitelist) — cepat, untuk UX.
+     *  2. Isi file asli lewat getimagesize()/MIME — supaya file yang sengaja
+     *     diganti namanya (mis. shell.php diubah jadi shell.jpg) tetap ditolak.
+     */
+    protected function uploadImage(string $inputName, string $subDir = 'games'): ?string {
+        if (empty($_FILES[$inputName]['name'])) return null;
+
+        $allowedExt  = ['jpg', 'jpeg', 'png', 'webp'];
+        $allowedMime = ['image/jpeg', 'image/png', 'image/webp'];
+
+        $ext = strtolower(pathinfo($_FILES[$inputName]['name'], PATHINFO_EXTENSION));
+        if (!in_array($ext, $allowedExt, true)) {
+            self::setToast('Format gambar tidak valid! Gunakan JPG/PNG/WEBP.', 'danger');
+            return null;
+        }
+
+        // Cek isi file asli, bukan cuma nama/ekstensinya.
+        $info = @getimagesize($_FILES[$inputName]['tmp_name']);
+        if (!$info || !in_array($info['mime'], $allowedMime, true)) {
+            self::setToast('File yang diunggah bukan gambar yang valid.', 'danger');
+            return null;
+        }
+
+        $uploadDir = ROOT_DIR . "/public/assets/img/{$subDir}/";
+        if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
+
+        $filename = time() . '_' . uniqid() . '.' . $ext;
+        move_uploaded_file($_FILES[$inputName]['tmp_name'], $uploadDir . $filename);
+        return $filename;
     }
 }

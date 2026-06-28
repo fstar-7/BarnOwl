@@ -6,6 +6,7 @@
     </p>
 
     <form action="<?= BASE_URL ?>/support/submit" method="POST">
+        <?= CsrfHelper::field() ?>
 
         <div class="mb-3">
             <label class="form-label small text-secondary">Nama Lengkap</label>
